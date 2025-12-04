@@ -55,6 +55,11 @@ import {
   UserCog,
   Briefcase,
   ShieldAlert,
+  Grid3x3,
+  Mail,
+  Send,
+  Lightbulb,
+  Brain,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -107,7 +112,15 @@ const navigationGroups = [
       { name: "Exams", href: "/exams", icon: ClipboardList },
       { name: "Timetable", href: "/timetable", icon: Clock },
       { name: "Performance", href: "/performance", icon: Award },
-      { name: "Library", href: "/library", icon: Library },
+    ],
+  },
+  {
+    name: "Library",
+    icon: Library,
+    items: [
+      { name: "Categories", href: "/library/categories", icon: Grid3x3 },
+      { name: "All Books", href: "/library/books", icon: BookOpen },
+      { name: "Borrowed Books", href: "/library/borrow", icon: Calendar },
     ],
   },
   {
@@ -126,15 +139,31 @@ const navigationGroups = [
       { name: "Student Performance", href: "/ai-student-performance", icon: Target },
       { name: "Finance Predictions", href: "/ai-finance", icon: TrendingUp },
       { name: "Attendance Analytics", href: "/ai-attendance", icon: Calendar },
-      { name: "AI Teacher", href: "/ai-teacher", icon: Bot },
+    ],
+  },
+  {
+    name: "AI Teacher",
+    icon: Bot,
+    items: [
+      { name: "Assistant Dashboard", href: "/ai-teacher", icon: Bot },
+      { name: "Lesson Plans", href: "/ai-teacher/lesson-plans", icon: BookMarked },
+      { name: "Recommendations", href: "/ai-teacher/recommendations", icon: Lightbulb },
     ],
   },
   {
     name: "Communication",
     icon: MessageSquare,
     items: [
-      { name: "Messaging", href: "/messaging", icon: MessageSquare },
       { name: "Announcements", href: "/communication", icon: Bell },
+    ],
+  },
+  {
+    name: "Messaging",
+    icon: Mail,
+    items: [
+      { name: "Inbox", href: "/messaging/inbox", icon: Mail },
+      { name: "Compose", href: "/messaging/compose", icon: Send },
+      { name: "Groups", href: "/messaging/groups", icon: Users },
     ],
   },
   {
@@ -143,6 +172,7 @@ const navigationGroups = [
     items: [
       { name: "All Reports", href: "/reports", icon: FileText },
       { name: "Analytics Dashboard", href: "/analytics", icon: BarChart3 },
+      { name: "Advanced Analytics", href: "/analytics/advanced", icon: Brain },
       { name: "Student Performance", href: "/analytics/student-performance", icon: Target },
       { name: "Attendance Trends", href: "/analytics/attendance-trends", icon: Calendar },
     ],
