@@ -9,6 +9,7 @@ import { useTheme } from "@/components/theme-provider";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import FloatingChatbot from "@/components/floating-chatbot";
+import AIRecommendationModals from "@/components/ai-recommendation-modals";
 import {
   LayoutDashboard,
   Users,
@@ -60,6 +61,8 @@ import {
   Send,
   Lightbulb,
   Brain,
+  Activity,
+  BarChart3,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -99,6 +102,8 @@ const navigationGroups = [
     items: [
       { name: "Fees Management", href: "/fees", icon: DollarSign },
       { name: "Payments", href: "/payments", icon: CreditCard },
+      { name: "MTN Mobile Money", href: "/payments/mtn-momo", icon: CreditCard },
+      { name: "Airtel Money", href: "/payments/airtel-momo", icon: CreditCard },
       { name: "Transactions", href: "/transactions", icon: Receipt },
       { name: "Financial Reports", href: "/financial-reports", icon: TrendingUp },
     ],
@@ -128,6 +133,7 @@ const navigationGroups = [
     icon: Calendar,
     items: [
       { name: "Mark Attendance", href: "/attendance", icon: Calendar },
+      { name: "Biometric Attendance", href: "/attendance/biometric", icon: UserCheck },
       { name: "Attendance Reports", href: "/attendance-reports", icon: FileText },
     ],
   },
@@ -148,6 +154,14 @@ const navigationGroups = [
       { name: "Assistant Dashboard", href: "/ai-teacher", icon: Bot },
       { name: "Lesson Plans", href: "/ai-teacher/lesson-plans", icon: BookMarked },
       { name: "Recommendations", href: "/ai-teacher/recommendations", icon: Lightbulb },
+    ],
+  },
+  {
+    name: "AI Copilot",
+    icon: Brain,
+    items: [
+      { name: "Copilot Dashboard", href: "/ai-copilot", icon: Brain },
+      { name: "Decision Insights", href: "/ai-copilot/insights", icon: Lightbulb },
     ],
   },
   {
@@ -173,8 +187,17 @@ const navigationGroups = [
       { name: "All Reports", href: "/reports", icon: FileText },
       { name: "Analytics Dashboard", href: "/analytics", icon: BarChart3 },
       { name: "Advanced Analytics", href: "/analytics/advanced", icon: Brain },
+      { name: "Financial Reports", href: "/reports/finance", icon: DollarSign },
+      { name: "Academic Reports", href: "/reports/academic", icon: GraduationCap },
       { name: "Student Performance", href: "/analytics/student-performance", icon: Target },
       { name: "Attendance Trends", href: "/analytics/attendance-trends", icon: Calendar },
+    ],
+  },
+  {
+    name: "Operations",
+    icon: Activity,
+    items: [
+      { name: "Operations Dashboard", href: "/operations/dashboard", icon: Activity },
     ],
   },
   {
@@ -187,6 +210,13 @@ const navigationGroups = [
       { name: "Onboarding", href: "/onboarding", icon: Briefcase },
       { name: "Audit Logs", href: "/audit-logs", icon: Shield },
       { name: "Settings", href: "/settings", icon: Cog },
+    ],
+  },
+  {
+    name: "Help & Resources",
+    icon: BookOpen,
+    items: [
+      { name: "Documentation", href: "/docs", icon: BookOpen },
     ],
   },
 ];
@@ -535,6 +565,9 @@ export default function DashboardLayout({ children }) {
           })}
         </div>
       </nav>
+
+      {/* AI Recommendation Modals */}
+      <AIRecommendationModals />
     </div>
   );
 }
