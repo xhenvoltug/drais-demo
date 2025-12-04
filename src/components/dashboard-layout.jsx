@@ -8,6 +8,7 @@ import { DraisLogo } from "@/components/drais-logo";
 import { useTheme } from "@/components/theme-provider";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import FloatingChatbot from "@/components/floating-chatbot";
 import {
   LayoutDashboard,
   Users,
@@ -30,6 +31,7 @@ import {
   Bell,
   Search,
   ChevronDown,
+  ChevronRight,
   LogOut,
   User,
   CreditCard,
@@ -37,6 +39,22 @@ import {
   Upload,
   Bot,
   Shield,
+  Wallet,
+  Receipt,
+  TrendingUp,
+  Award,
+  Target,
+  Sparkles,
+  Library,
+  Cog,
+  IdCard,
+  ArrowUpCircle,
+  UserCircle,
+  BookMarked,
+  ShieldCheck,
+  UserCog,
+  Briefcase,
+  ShieldAlert,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -47,26 +65,100 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const navigation = [
-  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { name: "Students", href: "/students", icon: Users },
-  { name: "Staff", href: "/staff", icon: UserCheck },
-  { name: "Classes", href: "/classes", icon: GraduationCap },
-  { name: "Subjects", href: "/subjects", icon: BookOpen },
-  { name: "Exams", href: "/exams", icon: ClipboardList },
-  { name: "Attendance", href: "/attendance", icon: Calendar },
-  { name: "Fees", href: "/fees", icon: DollarSign },
-  { name: "Payments", href: "/payments", icon: CreditCard },
-  { name: "Student Import", href: "/students/import", icon: Upload },
-  { name: "AI Teacher", href: "/ai-teacher", icon: Bot },
-  { name: "Audit Logs", href: "/audit-logs", icon: Shield },
-  { name: "Onboarding", href: "/onboarding", icon: UserPlus },
-  { name: "Reports", href: "/reports", icon: FileText },
-  { name: "Discipline", href: "/discipline", icon: AlertTriangle },
-  { name: "Communication", href: "/communication", icon: MessageSquare },
-  { name: "Timetable", href: "/timetable", icon: Clock },
-  { name: "Analytics", href: "/analytics", icon: BarChart3 },
-  { name: "Settings", href: "/settings", icon: Settings },
+// Grouped Navigation Structure
+const navigationGroups = [
+  {
+    name: "Overview",
+    items: [
+      { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+    ],
+  },
+  {
+    name: "Students",
+    icon: Users,
+    items: [
+      { name: "All Students", href: "/students", icon: Users },
+      { name: "Admissions", href: "/students/admission", icon: UserPlus },
+      { name: "ID Cards", href: "/students/id-cards", icon: IdCard },
+      { name: "Pocket Money", href: "/students/pocket-money", icon: Wallet },
+      { name: "Promote Students", href: "/students/promote", icon: ArrowUpCircle },
+      { name: "Alumni", href: "/students/alumni", icon: UserCircle },
+      { name: "Discipline", href: "/students/discipline", icon: AlertTriangle },
+      { name: "Suspended", href: "/students/suspended", icon: ShieldAlert },
+      { name: "Import Students", href: "/students/import", icon: Upload },
+    ],
+  },
+  {
+    name: "Financial",
+    icon: DollarSign,
+    items: [
+      { name: "Fees Management", href: "/fees", icon: DollarSign },
+      { name: "Payments", href: "/payments", icon: CreditCard },
+      { name: "Transactions", href: "/transactions", icon: Receipt },
+      { name: "Financial Reports", href: "/financial-reports", icon: TrendingUp },
+    ],
+  },
+  {
+    name: "Academic",
+    icon: GraduationCap,
+    items: [
+      { name: "Classes", href: "/classes", icon: GraduationCap },
+      { name: "Subjects", href: "/subjects", icon: BookOpen },
+      { name: "Exams", href: "/exams", icon: ClipboardList },
+      { name: "Timetable", href: "/timetable", icon: Clock },
+      { name: "Performance", href: "/performance", icon: Award },
+      { name: "Library", href: "/library", icon: Library },
+    ],
+  },
+  {
+    name: "Attendance",
+    icon: Calendar,
+    items: [
+      { name: "Mark Attendance", href: "/attendance", icon: Calendar },
+      { name: "Attendance Reports", href: "/attendance-reports", icon: FileText },
+    ],
+  },
+  {
+    name: "AI Insights",
+    icon: Sparkles,
+    items: [
+      { name: "AI Dashboard", href: "/ai-insights", icon: Sparkles },
+      { name: "Student Performance", href: "/ai-student-performance", icon: Target },
+      { name: "Finance Predictions", href: "/ai-finance", icon: TrendingUp },
+      { name: "Attendance Analytics", href: "/ai-attendance", icon: Calendar },
+      { name: "AI Teacher", href: "/ai-teacher", icon: Bot },
+    ],
+  },
+  {
+    name: "Communication",
+    icon: MessageSquare,
+    items: [
+      { name: "Messaging", href: "/messaging", icon: MessageSquare },
+      { name: "Announcements", href: "/communication", icon: Bell },
+    ],
+  },
+  {
+    name: "Reports",
+    icon: FileText,
+    items: [
+      { name: "All Reports", href: "/reports", icon: FileText },
+      { name: "Analytics Dashboard", href: "/analytics", icon: BarChart3 },
+      { name: "Student Performance", href: "/analytics/student-performance", icon: Target },
+      { name: "Attendance Trends", href: "/analytics/attendance-trends", icon: Calendar },
+    ],
+  },
+  {
+    name: "Administration",
+    icon: Settings,
+    items: [
+      { name: "Staff Management", href: "/staff", icon: UserCheck },
+      { name: "Roles & Permissions", href: "/roles", icon: UserCog },
+      { name: "Discipline", href: "/discipline", icon: AlertTriangle },
+      { name: "Onboarding", href: "/onboarding", icon: Briefcase },
+      { name: "Audit Logs", href: "/audit-logs", icon: Shield },
+      { name: "Settings", href: "/settings", icon: Cog },
+    ],
+  },
 ];
 
 const mobileNavigation = [
@@ -78,10 +170,19 @@ const mobileNavigation = [
 
 export default function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [expandedGroups, setExpandedGroups] = useState(["Overview", "Students", "AI Insights"]);
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
 
   const isActive = (href) => pathname === href;
+  
+  const toggleGroup = (groupName) => {
+    setExpandedGroups((prev) =>
+      prev.includes(groupName)
+        ? prev.filter((g) => g !== groupName)
+        : [...prev, groupName]
+    );
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-slate-50 to-purple-50 dark:bg-gradient-to-bl dark:from-blue-950 dark:via-gray-950 dark:to-purple-950">
@@ -95,31 +196,88 @@ export default function DashboardLayout({ children }) {
               <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 DRAIS
               </h1>
-              <p className="text-xs text-gray-500 dark:text-gray-400">v0.0.0015</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">v0.0.0018</p>
             </div>
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 px-3 py-4 space-y-1">
-            {navigation.map((item) => {
-              const active = isActive(item.href);
-              return (
-                <Link key={item.name} href={item.href}>
-                  <motion.div
-                    whileHover={{ scale: 1.02, x: 4 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
-                      active
-                        ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
-                        : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                    }`}
-                  >
-                    <item.icon className="w-5 h-5" />
-                    {item.name}
-                  </motion.div>
-                </Link>
-              );
-            })}
+          <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+            {navigationGroups.map((group) => (
+              <div key={group.name} className="mb-2">
+                {group.items.length === 1 ? (
+                  // Single item groups (like Overview)
+                  <Link href={group.items[0].href}>
+                    <motion.div
+                      whileHover={{ scale: 1.02, x: 4 }}
+                      whileTap={{ scale: 0.98 }}
+                      className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                        isActive(group.items[0].href)
+                          ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
+                          : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                      }`}
+                    >
+                      {(() => {
+                        const Icon = group.items[0].icon;
+                        return <Icon className="w-5 h-5" />;
+                      })()}
+                      {group.items[0].name}
+                    </motion.div>
+                  </Link>
+                ) : (
+                  // Multi-item groups with collapsible functionality
+                  <>
+                    <button
+                      onClick={() => toggleGroup(group.name)}
+                      className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-semibold text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+                    >
+                      <div className="flex items-center gap-3">
+                        <group.icon className="w-5 h-5" />
+                        {group.name}
+                      </div>
+                      <motion.div
+                        animate={{ rotate: expandedGroups.includes(group.name) ? 90 : 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                      </motion.div>
+                    </button>
+                    <AnimatePresence>
+                      {expandedGroups.includes(group.name) && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="ml-4 mt-1 space-y-1 border-l-2 border-gray-200 dark:border-gray-700 pl-3">
+                            {group.items.map((item) => {
+                              const active = isActive(item.href);
+                              return (
+                                <Link key={item.name} href={item.href}>
+                                  <motion.div
+                                    whileHover={{ scale: 1.02, x: 4 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                                      active
+                                        ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md"
+                                        : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                                    }`}
+                                  >
+                                    <item.icon className="w-4 h-4" />
+                                    {item.name}
+                                  </motion.div>
+                                </Link>
+                              );
+                            })}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </>
+                )}
+              </div>
+            ))}
           </nav>
         </div>
       </aside>
@@ -159,27 +317,69 @@ export default function DashboardLayout({ children }) {
               </div>
 
               <nav className="px-3 py-4 space-y-1">
-                {navigation.map((item) => {
-                  const active = isActive(item.href);
-                  return (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      onClick={() => setSidebarOpen(false)}
-                    >
-                      <div
-                        className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
-                          active
-                            ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
-                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                        }`}
+                {navigationGroups.map((group) => (
+                  <div key={group.name} className="mb-2">
+                    {group.items.length === 1 ? (
+                      <Link
+                        href={group.items[0].href}
+                        onClick={() => setSidebarOpen(false)}
                       >
-                        <item.icon className="w-5 h-5" />
-                        {item.name}
-                      </div>
-                    </Link>
-                  );
-                })}
+                        <div
+                          className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                            isActive(group.items[0].href)
+                              ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
+                              : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                          }`}
+                        >
+                          {(() => {
+                            const Icon = group.items[0].icon;
+                            return <Icon className="w-5 h-5" />;
+                          })()}
+                          {group.items[0].name}
+                        </div>
+                      </Link>
+                    ) : (
+                      <>
+                        <button
+                          onClick={() => toggleGroup(group.name)}
+                          className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-semibold text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+                        >
+                          <div className="flex items-center gap-3">
+                            <group.icon className="w-5 h-5" />
+                            {group.name}
+                          </div>
+                          <ChevronRight
+                            className={`w-4 h-4 transition-transform ${
+                              expandedGroups.includes(group.name) ? "rotate-90" : ""
+                            }`}
+                          />
+                        </button>
+                        {expandedGroups.includes(group.name) && (
+                          <div className="ml-4 mt-1 space-y-1 border-l-2 border-gray-200 dark:border-gray-700 pl-3">
+                            {group.items.map((item) => (
+                              <Link
+                                key={item.name}
+                                href={item.href}
+                                onClick={() => setSidebarOpen(false)}
+                              >
+                                <div
+                                  className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                                    isActive(item.href)
+                                      ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
+                                      : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                                  }`}
+                                >
+                                  <item.icon className="w-4 h-4" />
+                                  {item.name}
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </div>
+                ))}
               </nav>
             </motion.aside>
           </>
@@ -277,6 +477,9 @@ export default function DashboardLayout({ children }) {
             {children}
           </motion.div>
         </main>
+
+        {/* Floating Chatbot */}
+        <FloatingChatbot />
       </div>
 
       {/* Mobile Bottom Navigation */}
