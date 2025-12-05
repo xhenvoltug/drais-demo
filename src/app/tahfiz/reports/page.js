@@ -19,7 +19,7 @@ export default function TahfizReports() {
     avgProgress: 68,
     attendanceRate: 89,
     avgAccuracy: 92,
-    activeMemoriz ers: 187
+    activeMemorizers: 187
   };
 
   const classPerformance = [

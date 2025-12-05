@@ -19,6 +19,18 @@ export default function ExportSystem() {
   const [includeComponents, setIncludeComponents] = useState(true);
 
   const generateJSON = () => {
+    // Only access localStorage on the client side
+    if (typeof window === 'undefined') {
+      return JSON.stringify({
+        version: "0.0.0019",
+        exportedAt: new Date().toISOString(),
+        theme: null,
+        colors: null,
+        fonts: null,
+        components: null
+      }, null, 2);
+    }
+    
     const data = {
       version: "0.0.0019",
       exportedAt: new Date().toISOString(),
@@ -42,6 +54,11 @@ export default function ExportSystem() {
   };
 
   const generateCSS = () => {
+    // Only access localStorage on the client side
+    if (typeof window === 'undefined') {
+      return `:root { /* Default values */ }`;
+    }
+    
     const theme = JSON.parse(localStorage.getItem("drais_kitchen_theme") || "{}");
     const fonts = JSON.parse(localStorage.getItem("drais_kitchen_fonts") || "{}");
     const components = JSON.parse(localStorage.getItem("drais_kitchen_components") || "{}");
@@ -93,11 +110,13 @@ export default function ExportSystem() {
     reader.onload = (event) => {
       try {
         const data = JSON.parse(event.target?.result);
-        if (data.theme) localStorage.setItem("drais_kitchen_theme", JSON.stringify(data.theme));
-        if (data.colors) localStorage.setItem("drais_kitchen_palettes", JSON.stringify(data.colors));
-        if (data.fonts) localStorage.setItem("drais_kitchen_fonts", JSON.stringify(data.fonts));
-        if (data.components) localStorage.setItem("drais_kitchen_components", JSON.stringify(data.components));
-        alert("Settings imported successfully! Refresh to see changes.");
+        if (typeof window !== 'undefined') {
+          if (data.theme) localStorage.setItem("drais_kitchen_theme", JSON.stringify(data.theme));
+          if (data.colors) localStorage.setItem("drais_kitchen_palettes", JSON.stringify(data.colors));
+          if (data.fonts) localStorage.setItem("drais_kitchen_fonts", JSON.stringify(data.fonts));
+          if (data.components) localStorage.setItem("drais_kitchen_components", JSON.stringify(data.components));
+          alert("Settings imported successfully! Refresh to see changes.");
+        }
       } catch (err) {
         alert("Invalid JSON file");
       }
