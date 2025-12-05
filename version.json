@@ -1,9 +1,50 @@
 {
-  "version": "0.0.0031",
+  "version": "0.0.0033",
   "name": "DRAIS",
   "description": "School Management System by Xhenvolt",
   "lastUpdated": "2025-12-05",
   "changelog": [
+    {
+      "version": "0.0.0033",
+      "date": "2025-12-05",
+      "changes": [
+        "Added Tahfiz Module Phase 5 & 6 - Progress Tracking, Rewards & Leaderboards",
+        "Created Student Progress & Rewards UI with gamification system",
+        "Implemented animated progress rings for Juz/Surah/Ayah completion tracking",
+        "Built comprehensive badges system with 12+ achievement types and point values",
+        "Added certificates preview UI with 8 certificate designs (Juz, Skills, Achievements)",
+        "Created practice mode progress tracking (Solo/Group/Tutor) with percentage bars",
+        "Implemented gamified level progression system (Beginner to Grand Master)",
+        "Built Leaderboards UI with daily/weekly/monthly/all-time filters",
+        "Created Top 3 podium display with animated rank badges",
+        "Added full leaderboard table with accuracy bars, streak indicators, and trend arrows",
+        "Implemented weekly trend mini-charts for top 4 students",
+        "Created enhanced Tahfiz Sidebar with collapsible sections and 12 subsystem links",
+        "Added active route highlighting with gradient effects in sidebar",
+        "Implemented mobile-responsive sidebar with auto-collapse and overlay",
+        "Built tooltip system for badge hover interactions showing point values",
+        "Added student filtering and sorting by progress, streak, and points"
+      ]
+    },
+    {
+      "version": "0.0.0032",
+      "date": "2025-12-05",
+      "changes": [
+        "Added Tahfiz Module Phase 4 - Recitation Practice & AI Feedback",
+        "Created Recitation Practice Dashboard with Solo/Group/Tutor modes",
+        "Built interactive audio waveform animation for practice sessions",
+        "Implemented live recitation timer with progress ring visualization",
+        "Added Interactive Quiz UI with 3 quiz types: MCQ, Fill-in-Blank, Rearrange Ayah",
+        "Created quiz analytics dashboard with accuracy tracking and mistake heatmap",
+        "Built AI Mock Recitation Feedback UI with pronunciation/tajweed/fluency tabs",
+        "Implemented detailed feedback cards with severity indicators and suggestions",
+        "Added Recitation History UI with filterable table and weekly trend charts",
+        "Created mistake category distribution donut chart visualization",
+        "Enhanced mobile-first swipe interactions and tap-hold hints",
+        "Implemented auto-scroll feature for Ayah feedback review",
+        "Added comprehensive student recitation statistics and performance metrics"
+      ]
+    },
     {
       "version": "0.0.0031",
       "date": "2025-12-05",

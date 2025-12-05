@@ -124,6 +124,24 @@ const navigationGroups = [
     ],
   },
   {
+    name: "Tahfiz",
+    icon: BookOpen,
+    items: [
+      { name: "Dashboard", href: "/tahfiz/dashboard", icon: LayoutDashboard },
+      { name: "Recitation Practice", href: "/tahfiz/practice", icon: Activity },
+      { name: "Interactive Quiz", href: "/tahfiz/quiz", icon: Brain },
+      { name: "AI Feedback", href: "/tahfiz/ai-feedback", icon: Sparkles },
+      { name: "History", href: "/tahfiz/history", icon: Clock },
+      { name: "Progress & Rewards", href: "/tahfiz/progress", icon: Award },
+      { name: "Leaderboards", href: "/tahfiz/leaderboards", icon: Target },
+      { name: "Analytics", href: "/tahfiz/analytics", icon: BarChart3 },
+      { name: "Students", href: "/tahfiz/students", icon: Users },
+      { name: "Halaqa Sessions", href: "/tahfiz/halaqa", icon: UserCheck },
+      { name: "Assessments", href: "/tahfiz/assessments", icon: ClipboardList },
+      { name: "Settings", href: "/tahfiz/settings", icon: Settings },
+    ],
+  },
+  {
     name: "Library",
     icon: Library,
     items: [
