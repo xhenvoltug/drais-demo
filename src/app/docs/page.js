@@ -2,12 +2,19 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import {
   Book, Search, Moon, Sun, ChevronDown, ChevronRight, Home, FileText,
   DollarSign, BookOpen, Bus, Users, GraduationCap, Award, Building,
   Calendar, MessageSquare, Settings, BarChart3, Shield, Zap, CheckCircle,
-  AlertCircle, Info, Play, Download, ExternalLink, Copy, Star, Target
+  AlertCircle, Info, Play, Download, ExternalLink, Copy, Star, Target, Brain, 
+  Fingerprint, CreditCard, Lightbulb, Clock
 } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { DRAIS_VERSION } from '@/lib/version';
 
 // Version 0.0.0039
 

@@ -49,26 +49,41 @@ export const XHENVOLT_DATA = {
     professional: {
       name: "Professional",
       setup: 1000000,
-      termSubscription: 150000,
-      yearlySubscription: 300000,
+      termSubscription: 350000,
+      yearlySubscription: 900000,
+      oneTimePrice: 1490000, // 4 terms + 10% annual subscription
       gracePeriod: "2 weeks",
       target: "new schools, small schools, budget-sensitive schools",
+      savings: {
+        yearly: 150000, // Save 150K vs 3 terms (3×350K = 1.05M)
+        oneTime: 760000, // Save vs paying yearly for first year + subscription
+      }
     },
     premium: {
       name: "Premium", 
       setup: 1800000,
-      termSubscription: 200000,
-      yearlySubscription: 400000,
+      termSubscription: 600000,
+      yearlySubscription: 1300000,
+      oneTimePrice: 2530000, // 4 terms + 10% annual subscription
       gracePeriod: "1 month",
       target: "mid-size schools, growing institutions, high accuracy needs",
+      savings: {
+        yearly: 500000, // Save 500K vs 3 terms (3×600K = 1.8M)
+        oneTime: 1370000, // Save vs paying yearly for first year + subscription
+      }
     },
     gold: {
       name: "Gold",
       setup: 2500000,
-      termSubscription: 300000,
-      yearlySubscription: 600000,
+      termSubscription: 850000,
+      yearlySubscription: 1500000,
+      oneTimePrice: 3550000, // 4 terms + 10% annual subscription
       gracePeriod: "6 weeks",
       target: "large schools, premium infrastructure, automation-focused clients",
+      savings: {
+        yearly: 1050000, // Save 1.05M vs 3 terms (3×850K = 2.55M)
+        oneTime: 2000000, // Save vs paying yearly for first year + subscription
+      }
     },
   },
 } as const;

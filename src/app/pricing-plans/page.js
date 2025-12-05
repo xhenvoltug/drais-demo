@@ -13,7 +13,7 @@ import {
 // Version 0.0.0039 - DRAIS Comprehensive Pricing Page
 
 export default function ComprehensivePricing() {
-  const [billingCycle, setBillingCycle] = useState('annual'); // 'monthly' or 'annual'
+  const [billingCycle, setBillingCycle] = useState('termly'); // 'termly', 'annual', or 'oneTime'
 
   const plans = [
     {
@@ -22,9 +22,10 @@ export default function ComprehensivePricing() {
       tagline: 'Essential School Management',
       icon: Building,
       price: {
-        monthly: '350,000',
-        annual: '3,500,000',
-        savings: '700,000'
+        termly: '350,000',
+        annual: '900,000',
+        oneTime: '1,490,000',
+        savings: '150,000'
       },
       color: 'blue',
       description: 'Core modules for complete school operations',
@@ -64,9 +65,10 @@ export default function ComprehensivePricing() {
       tagline: 'Intelligence-Powered Management',
       icon: Zap,
       price: {
-        monthly: '650,000',
-        annual: '6,500,000',
-        savings: '1,300,000'
+        termly: '600,000',
+        annual: '1,300,000',
+        oneTime: '2,530,000',
+        savings: '500,000'
       },
       color: 'purple',
       description: 'Everything in Professional + Intelligence & Communications',
@@ -110,9 +112,10 @@ export default function ComprehensivePricing() {
       tagline: 'Complete Enterprise Solution',
       icon: Crown,
       price: {
-        monthly: '1,200,000',
-        annual: '12,000,000',
-        savings: '2,400,000'
+        termly: '850,000',
+        annual: '1,500,000',
+        oneTime: '3,550,000',
+        savings: '1,050,000'
       },
       color: 'amber',
       description: 'Full platform power + premium support',
@@ -268,7 +271,7 @@ export default function ComprehensivePricing() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-lg rounded-full text-sm font-semibold mb-6">
               <Sparkles className="w-4 h-4" />
-              Trusted by 250+ Schools
+              Trusted by 23+ Schools
             </div>
             <h1 className="text-5xl font-bold mb-4">Simple, Transparent Pricing</h1>
             <p className="text-xl opacity-90 mb-8 max-w-3xl mx-auto">
@@ -276,19 +279,26 @@ export default function ComprehensivePricing() {
             </p>
 
             {/* Billing Toggle */}
-            <div className="inline-flex items-center gap-4 bg-white/10 backdrop-blur-lg rounded-full p-2">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-lg rounded-full p-2">
               <button
-                onClick={() => setBillingCycle('monthly')}
-                className={`px-6 py-3 rounded-full font-semibold transition-all ${billingCycle === 'monthly' ? 'bg-white text-blue-600 shadow-lg' : 'text-white'}`}
+                onClick={() => setBillingCycle('termly')}
+                className={`px-4 py-2 rounded-full font-semibold transition-all text-sm ${billingCycle === 'termly' ? 'bg-white text-blue-600 shadow-lg' : 'text-white'}`}
               >
-                Monthly
+                Per Term
               </button>
               <button
                 onClick={() => setBillingCycle('annual')}
-                className={`px-6 py-3 rounded-full font-semibold transition-all flex items-center gap-2 ${billingCycle === 'annual' ? 'bg-white text-blue-600 shadow-lg' : 'text-white'}`}
+                className={`px-4 py-2 rounded-full font-semibold transition-all flex items-center gap-2 text-sm ${billingCycle === 'annual' ? 'bg-white text-blue-600 shadow-lg' : 'text-white'}`}
               >
                 Annual
-                <span className="px-2 py-1 bg-emerald-500 text-white text-xs rounded-full">Save 20%</span>
+                <span className="px-2 py-0.5 bg-emerald-500 text-white text-xs rounded-full">Save More</span>
+              </button>
+              <button
+                onClick={() => setBillingCycle('oneTime')}
+                className={`px-4 py-2 rounded-full font-semibold transition-all flex items-center gap-2 text-sm ${billingCycle === 'oneTime' ? 'bg-white text-blue-600 shadow-lg' : 'text-white'}`}
+              >
+                One-Time
+                <span className="px-2 py-0.5 bg-purple-500 text-white text-xs rounded-full">4 Terms + 10%</span>
               </button>
             </div>
           </motion.div>
@@ -332,13 +342,29 @@ export default function ComprehensivePricing() {
                   <div className="flex items-baseline gap-2">
                     <span className="text-sm text-gray-600 dark:text-gray-400">UGX</span>
                     <span className="text-4xl font-bold text-gray-900 dark:text-white">
-                      {billingCycle === 'monthly' ? plan.price.monthly.toLocaleString() : plan.price.annual.toLocaleString()}
+                      {billingCycle === 'termly' && plan.price.termly}
+                      {billingCycle === 'annual' && plan.price.annual}
+                      {billingCycle === 'oneTime' && plan.price.oneTime}
                     </span>
-                    <span className="text-gray-600 dark:text-gray-400">/{billingCycle === 'monthly' ? 'mo' : 'yr'}</span>
+                    <span className="text-gray-600 dark:text-gray-400">
+                      {billingCycle === 'termly' && '/term'}
+                      {billingCycle === 'annual' && '/year'}
+                      {billingCycle === 'oneTime' && 'one-time'}
+                    </span>
                   </div>
+                  {billingCycle === 'termly' && (
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                      UGX {(parseInt(plan.price.termly.replace(/,/g, '')) * 3).toLocaleString()} for 3 terms/year
+                    </p>
+                  )}
                   {billingCycle === 'annual' && (
                     <p className="text-sm text-emerald-600 dark:text-emerald-400 mt-2 font-semibold">
-                      💰 Save UGX {plan.price.savings.toLocaleString()} per year
+                      💰 Save UGX {plan.price.savings} vs termly payments
+                    </p>
+                  )}
+                  {billingCycle === 'oneTime' && (
+                    <p className="text-sm text-purple-600 dark:text-purple-400 mt-2 font-semibold">
+                      🎯 4 terms + 10% annual subscription included
                     </p>
                   )}
                 </div>

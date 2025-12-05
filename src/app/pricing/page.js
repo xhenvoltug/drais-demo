@@ -29,6 +29,8 @@ const plans = [
     setupPrice: XHENVOLT_DATA.pricing.professional.setup,
     termPrice: XHENVOLT_DATA.pricing.professional.termSubscription,
     yearlyPrice: XHENVOLT_DATA.pricing.professional.yearlySubscription,
+    oneTimePrice: XHENVOLT_DATA.pricing.professional.oneTimePrice,
+    yearlySavings: XHENVOLT_DATA.pricing.professional.savings.yearly,
     gracePeriod: XHENVOLT_DATA.pricing.professional.gracePeriod,
     description: "Perfect for new schools and budget-sensitive institutions",
     target: XHENVOLT_DATA.pricing.professional.target,
@@ -57,7 +59,9 @@ const plans = [
     name: XHENVOLT_DATA.pricing.premium.name,
     setupPrice: XHENVOLT_DATA.pricing.premium.setup,
     termPrice: XHENVOLT_DATA.pricing.premium.termSubscription,
-    yearlyPrice: XHENVOLT_DATA.pricing.premium.yearlySubscription, 
+    yearlyPrice: XHENVOLT_DATA.pricing.premium.yearlySubscription,
+    oneTimePrice: XHENVOLT_DATA.pricing.premium.oneTimePrice,
+    yearlySavings: XHENVOLT_DATA.pricing.premium.savings.yearly,
     gracePeriod: XHENVOLT_DATA.pricing.premium.gracePeriod,
     description: "Best for mid-size schools seeking growth and efficiency",
     target: XHENVOLT_DATA.pricing.premium.target,
@@ -86,6 +90,8 @@ const plans = [
     setupPrice: XHENVOLT_DATA.pricing.gold.setup,
     termPrice: XHENVOLT_DATA.pricing.gold.termSubscription,
     yearlyPrice: XHENVOLT_DATA.pricing.gold.yearlySubscription,
+    oneTimePrice: XHENVOLT_DATA.pricing.gold.oneTimePrice,
+    yearlySavings: XHENVOLT_DATA.pricing.gold.savings.yearly,
     gracePeriod: XHENVOLT_DATA.pricing.gold.gracePeriod,
     description: "Premium solution for large schools and institutions",
     target: XHENVOLT_DATA.pricing.gold.target,
@@ -228,23 +234,40 @@ export default function Pricing() {
                     </div>
                     <CardTitle className="text-2xl">{plan.name}</CardTitle>
                     <CardDescription className="text-base mt-2">{plan.description}</CardDescription>
-                    <div className="mt-6 space-y-3">
-                      <div className="text-center">
-                        <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">Setup Fee</div>
+                    <div className="mt-6 space-y-4">
+                      <div className="text-center pb-3 border-b border-gray-200 dark:border-gray-700">
+                        <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">Setup Fee (One-time)</div>
                         <div className="text-xl font-bold text-blue-600">{formatUGX(plan.setupPrice)}</div>
                       </div>
-                      <div className="grid grid-cols-2 gap-4 text-center">
-                        <div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">Per Term</div>
-                          <div className="text-lg font-semibold">{formatUGX(plan.termPrice)}</div>
+                      
+                      <div className="space-y-3">
+                        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
+                          <div className="text-sm font-medium text-blue-700 dark:text-blue-300 mb-1">Per Term (3 terms/year)</div>
+                          <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{formatUGX(plan.termPrice)}</div>
+                          <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">{formatUGX(plan.termPrice * 3)} per year</div>
                         </div>
-                        <div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">Per Year</div>
-                          <div className="text-lg font-semibold text-green-600">{formatUGX(plan.yearlyPrice)}</div>
+
+                        <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 border-2 border-green-500">
+                          <div className="flex items-center justify-between mb-1">
+                            <div className="text-sm font-medium text-green-700 dark:text-green-300">Annual Plan</div>
+                            <Badge className="bg-green-600 text-white text-xs">Save {formatUGX(plan.yearlySavings)}</Badge>
+                          </div>
+                          <div className="text-2xl font-bold text-green-600 dark:text-green-400">{formatUGX(plan.yearlyPrice)}</div>
+                          <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Best value for 12 months</div>
+                        </div>
+
+                        <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-3">
+                          <div className="flex items-center justify-between mb-1">
+                            <div className="text-sm font-medium text-purple-700 dark:text-purple-300">One-Time Payment</div>
+                            <Badge variant="outline" className="text-purple-600 text-xs">4 terms + 10% annual</Badge>
+                          </div>
+                          <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">{formatUGX(plan.oneTimePrice)}</div>
+                          <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Pay once, use for 16 months</div>
                         </div>
                       </div>
-                      <div className="text-center text-sm text-purple-600 dark:text-purple-400">
-                        Grace Period: {plan.gracePeriod}
+
+                      <div className="text-center text-sm text-gray-600 dark:text-gray-400 pt-2">
+                        Grace Period: <span className="font-semibold text-purple-600 dark:text-purple-400">{plan.gracePeriod}</span>
                       </div>
                     </div>
                   </CardHeader>

@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "generate:favicons": "node scripts/generate-favicons.js",
+    "generate:og-images": "node scripts/generate-og-images.js",
+    "generate:assets": "npm run generate:favicons && npm run generate:og-images"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.19",

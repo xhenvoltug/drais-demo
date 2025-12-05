@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "react-hot-toast";
+import { defaultSEO, generateOrganizationSchema, generateSoftwareApplicationSchema } from "@/lib/seo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,14 +14,42 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// Comprehensive SEO metadata
 export const metadata = {
-  title: "DRAIS 2.0 - School Management Made Easy",
-  description: "Comprehensive school management system by Xhenvolt - Student management, staff tracking, attendance, exams, fees, and more.",
+  ...defaultSEO,
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+  },
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#2563eb' },
+    { media: '(prefers-color-scheme: dark)', color: '#1e40af' },
+  ],
 };
 
 export default function RootLayout({ children }) {
+  // Generate structured data
+  const organizationSchema = generateOrganizationSchema();
+  const softwareSchema = generateSoftwareApplicationSchema();
+
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* JSON-LD Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(softwareSchema),
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

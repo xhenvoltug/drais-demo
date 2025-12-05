@@ -263,7 +263,7 @@ export default function MessagingInboxPage() {
 
       {/* Footer */}
       <div className="text-center text-sm text-gray-500 dark:text-gray-400">
-        DRAIS {DRAIS_VERSION} • Messaging System
+        DRAIS 2.0 • Messaging System
       </div>
     </div>
   );
