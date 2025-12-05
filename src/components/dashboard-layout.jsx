@@ -142,6 +142,16 @@ const navigationGroups = [
     ],
   },
   {
+    name: "Grading & Feedback",
+    icon: Award,
+    items: [
+      { name: "Grading Dashboard", href: "/exams/grading", icon: LayoutDashboard },
+      { name: "Grade Analytics", href: "/exams/grade-analytics", icon: BarChart3 },
+      { name: "Feedback Templates", href: "/exams/feedback-templates", icon: FileText },
+      { name: "Student Results", href: "/exams/results/student-portal", icon: Users },
+    ],
+  },
+  {
     name: "Tahfiz",
     icon: BookOpen,
     items: [

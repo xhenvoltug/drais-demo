@@ -1,46 +1,21 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { motion, AnimatePresence } from "framer-motion";
-import { DRAIS_VERSION } from "@/lib/version";
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import {
-  Search,
-  BookOpen,
-  Users,
-  Calendar,
-  FileText,
-  DollarSign,
-  AlertTriangle,
-  MessageSquare,
-  Clock,
-  Shield,
-  Brain,
-  CreditCard,
-  FileCheck,
-  UserPlus,
-  BarChart3,
-  Fingerprint,
-  ChevronRight,
-  Play,
-  Lightbulb,
-  Sparkles,
-  Target,
-  TrendingUp,
-  Zap,
-  Award,
-} from "lucide-react";
-import Link from "next/link";
+  Book, Search, Moon, Sun, ChevronDown, ChevronRight, Home, FileText,
+  DollarSign, BookOpen, Bus, Users, GraduationCap, Award, Building,
+  Calendar, MessageSquare, Settings, BarChart3, Shield, Zap, CheckCircle,
+  AlertCircle, Info, Play, Download, ExternalLink, Copy, Star
+} from 'lucide-react';
+
+// Version 0.0.0039
 
 const docCategories = [
   {
     name: "Getting Started",
-    icon: Sparkles,
-    color: "from-purple-500 to-indigo-600",
-    bgColor: "from-purple-50 to-indigo-50 dark:from-purple-950/30 dark:to-indigo-950/30",
+    icon: Home,
+    color: "blue",
     docs: [
       { title: "Introduction to DRAIS", slug: "introduction", readTime: "5 min", level: "Beginner" },
       { title: "Quick Start Guide", slug: "quick-start", readTime: "10 min", level: "Beginner" },

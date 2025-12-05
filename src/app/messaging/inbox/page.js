@@ -1,15 +1,12 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { motion } from "framer-motion";
-import { Mail, Search, Inbox as InboxIcon, Send, Trash2, Star, Clock } from "lucide-react";
-import { DRAIS_VERSION } from "@/lib/version";
-import Link from "next/link";
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  MessageSquare, Send, Search, Plus, User, Users, Star, Archive,
+  Trash2, MoreVertical, Paperclip, Smile, X, Check, CheckCheck,
+  Clock, Filter, ChevronLeft, Edit, Phone, Video, Info
+} from 'lucide-react';
 
 export default function MessagingInboxPage() {
   const [searchTerm, setSearchTerm] = useState("");
