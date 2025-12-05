@@ -124,6 +124,24 @@ const navigationGroups = [
     ],
   },
   {
+    name: "Examinations",
+    icon: ClipboardList,
+    items: [
+      { name: "Exams Dashboard", href: "/exams/dashboard", icon: LayoutDashboard },
+      { name: "Create Exam", href: "/exams/create", icon: FileEdit },
+      { name: "Question Bank", href: "/exams/question-bank", icon: BookOpen },
+      { name: "Schedule Calendar", href: "/exams/schedule", icon: Calendar },
+      { name: "Monitoring", href: "/exams/monitoring", icon: Activity },
+      { name: "Results & Grading", href: "/exams/results", icon: Award },
+      { name: "Advanced Settings", href: "/exams/settings", icon: Settings },
+      { name: "Bulk Actions", href: "/exams/bulk-actions", icon: Upload },
+      { name: "Analytics & Reports", href: "/exams/analytics", icon: BarChart3 },
+      { name: "Notifications", href: "/exams/notifications", icon: Bell },
+      { name: "Cloning & Reuse", href: "/exams/cloning", icon: FileText },
+      { name: "Security & Permissions", href: "/exams/permissions", icon: Shield },
+    ],
+  },
+  {
     name: "Tahfiz",
     icon: BookOpen,
     items: [

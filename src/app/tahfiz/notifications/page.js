@@ -1,404 +1,244 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import TahfizNavBar from '@/components/tahfiz-navbar';
 import {
-  Bell, Clock, CheckCircle, AlertTriangle, Award, BookOpen,
-  X, Filter, Calendar, Users, Target, Trash2, MailOpen
+  Bell, Award, Trophy, Calendar, AlertCircle, CheckCircle,
+  X, Trash2, Eye, Filter, Star, BookOpen, Target, Flame,
+  MessageSquare, Users, Clock, TrendingUp, Download, Sparkles
 } from 'lucide-react';
 
-export default function TahfizNotificationCenter() {
-  const [notifications, setNotifications] = useState([]);
+export default function Notifications() {
   const [filter, setFilter] = useState('all');
+  const [notifications, setNotifications] = useState([
+    { id: 1, type: 'badge', title: 'New Badge Earned!', message: 'Ahmed Hassan earned "30-Day Streak Master" badge', time: '5 mins ago', read: false, icon: Trophy, color: 'amber', student: 'Ahmed Hassan' },
+    { id: 2, type: 'progress', title: 'Juz Completed', message: 'Fatima Ali completed Juz 18 with 96% accuracy', time: '1 hour ago', read: false, icon: CheckCircle, color: 'emerald', student: 'Fatima Ali' },
+    { id: 3, type: 'quiz', title: 'Quiz Reminder', message: 'Juz 8 Quiz scheduled for tomorrow at 10:00 AM', time: '2 hours ago', read: false, icon: Calendar, color: 'purple', student: null },
+    { id: 4, type: 'alert', title: 'Attention Needed', message: 'Omar Khalil\'s accuracy dropped below 90%', time: '3 hours ago', read: true, icon: AlertCircle, color: 'red', student: 'Omar Khalil' },
+    { id: 5, type: 'certificate', title: 'Certificate Ready', message: 'Juz 15 Mastery Certificate is ready for download', time: '5 hours ago', read: true, icon: Award, color: 'blue', student: 'Aisha Mohammed' },
+    { id: 6, type: 'announcement', title: 'System Update', message: 'New AI feedback features now available in practice mode', time: '1 day ago', read: true, icon: Sparkles, color: 'purple', student: null },
+    { id: 7, type: 'progress', title: 'Weekly Goal Achieved', message: 'You completed 5 practice sessions this week!', time: '1 day ago', read: true, icon: Target, color: 'emerald', student: null },
+    { id: 8, type: 'badge', title: 'Achievement Unlocked', message: 'Earned "Perfect Recitation" badge for 3 consecutive sessions', time: '2 days ago', read: true, icon: Star, color: 'amber', student: null },
+    { id: 9, type: 'quiz', title: 'Quiz Results', message: 'Your Juz 7 Quiz score: 94% - Excellent work!', time: '2 days ago', read: true, icon: TrendingUp, color: 'emerald', student: null },
+    { id: 10, type: 'progress', title: 'Milestone Reached', message: 'Khadija Ahmed reached 50% Quran memorization', time: '3 days ago', read: true, icon: Trophy, color: 'purple', student: 'Khadija Ahmed' },
+    { id: 11, type: 'alert', title: 'Streak at Risk', message: 'Yusuf Ibrahim hasn\'t practiced in 2 days', time: '3 days ago', read: true, icon: Flame, color: 'orange', student: 'Yusuf Ibrahim' },
+    { id: 12, type: 'announcement', title: 'Halaqa Session', message: 'Special Tajweed session tomorrow at 4:00 PM', time: '4 days ago', read: true, icon: BookOpen, color: 'blue', student: null }
+  ]);
 
-  useEffect(() => {
-    // Mock notifications with animation
-    const mockNotifications = [
-      {
-        id: 1,
-        type: 'halaqa-reminder',
-        avatar: 'A',
-        name: 'Ahmed Hassan',
-        message: 'Halaqa session starting in 15 minutes',
-        time: '10 minutes ago',
-        read: false,
-        timestamp: new Date(Date.now() - 10 * 60 * 1000)
-      },
-      {
-        id: 2,
-        type: 'missed-session',
-        avatar: 'F',
-        name: 'Fatima Ali',
-        message: 'Missed morning Halaqa session',
-        time: '2 hours ago',
-        read: false,
-        timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000)
-      },
-      {
-        id: 3,
-        type: 'assessment-due',
-        avatar: 'O',
-        name: 'Omar Khalil',
-        message: 'Monthly assessment due tomorrow',
-        time: '5 hours ago',
-        read: false,
-        timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000)
-      },
-      {
-        id: 4,
-        type: 'milestone',
-        avatar: 'M',
-        name: 'Maryam Abdullah',
-        message: 'Completed Juz 20! 🎉',
-        time: '1 day ago',
-        read: true,
-        timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000)
-      },
-      {
-        id: 5,
-        type: 'halaqa-reminder',
-        avatar: 'Y',
-        name: 'Yusuf Ibrahim',
-        message: 'Afternoon Halaqa starts at 2:00 PM',
-        time: '1 day ago',
-        read: true,
-        timestamp: new Date(Date.now() - 26 * 60 * 60 * 1000)
-      },
-      {
-        id: 6,
-        type: 'assessment-due',
-        avatar: 'H',
-        name: 'Hassan Malik',
-        message: 'Tajweed assessment scheduled for Friday',
-        time: '2 days ago',
-        read: true,
-        timestamp: new Date(Date.now() - 48 * 60 * 60 * 1000)
-      },
-      {
-        id: 7,
-        type: 'milestone',
-        avatar: 'Z',
-        name: 'Zainab Ahmed',
-        message: 'Earned "30-Day Streak" badge!',
-        time: '3 days ago',
-        read: true,
-        timestamp: new Date(Date.now() - 72 * 60 * 60 * 1000)
-      },
-      {
-        id: 8,
-        type: 'missed-session',
-        avatar: 'A',
-        name: 'Aisha Mohammed',
-        message: 'Absent from evening revision session',
-        time: '3 days ago',
-        read: true,
-        timestamp: new Date(Date.now() - 76 * 60 * 60 * 1000)
-      },
-    ];
+  const filters = [
+    { id: 'all', label: 'All', count: notifications.length },
+    { id: 'unread', label: 'Unread', count: notifications.filter(n => !n.read).length },
+    { id: 'badge', label: 'Badges', count: notifications.filter(n => n.type === 'badge').length },
+    { id: 'progress', label: 'Progress', count: notifications.filter(n => n.type === 'progress').length },
+    { id: 'quiz', label: 'Quizzes', count: notifications.filter(n => n.type === 'quiz').length },
+    { id: 'alert', label: 'Alerts', count: notifications.filter(n => n.type === 'alert').length }
+  ];
 
-    setNotifications(mockNotifications);
-  }, []);
-
-  const getNotificationStyle = (type) => {
-    switch (type) {
-      case 'halaqa-reminder':
-        return {
-          bg: 'bg-blue-50 dark:bg-blue-950',
-          border: 'border-blue-500',
-          icon: Bell,
-          iconColor: 'text-blue-600 dark:text-blue-400',
-          iconBg: 'bg-blue-100 dark:bg-blue-900'
-        };
-      case 'missed-session':
-        return {
-          bg: 'bg-red-50 dark:bg-red-950',
-          border: 'border-red-500',
-          icon: X,
-          iconColor: 'text-red-600 dark:text-red-400',
-          iconBg: 'bg-red-100 dark:bg-red-900'
-        };
-      case 'assessment-due':
-        return {
-          bg: 'bg-amber-50 dark:bg-amber-950',
-          border: 'border-amber-500',
-          icon: AlertTriangle,
-          iconColor: 'text-amber-600 dark:text-amber-400',
-          iconBg: 'bg-amber-100 dark:bg-amber-900'
-        };
-      case 'milestone':
-        return {
-          bg: 'bg-green-50 dark:bg-green-950',
-          border: 'border-green-500',
-          icon: Award,
-          iconColor: 'text-green-600 dark:text-green-400',
-          iconBg: 'bg-green-100 dark:bg-green-900'
-        };
-      default:
-        return {
-          bg: 'bg-gray-50 dark:bg-gray-950',
-          border: 'border-gray-500',
-          icon: Bell,
-          iconColor: 'text-gray-600 dark:text-gray-400',
-          iconBg: 'bg-gray-100 dark:bg-gray-900'
-        };
-    }
-  };
-
-  const filteredNotifications = notifications.filter(notif => {
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
-
-    if (filter === 'unread') return !notif.read;
-    if (filter === 'today') return notif.timestamp >= today;
-    if (filter === 'week') return notif.timestamp >= weekAgo;
-    return true;
+  const filteredNotifications = notifications.filter(n => {
+    if (filter === 'all') return true;
+    if (filter === 'unread') return !n.read;
+    return n.type === filter;
   });
-
-  const markAsRead = (id) => {
-    setNotifications(prev =>
-      prev.map(notif =>
-        notif.id === id ? { ...notif, read: true } : notif
-      )
-    );
-  };
-
-  const dismissNotification = (id) => {
-    setNotifications(prev => prev.filter(notif => notif.id !== id));
-  };
-
-  const markAllAsRead = () => {
-    setNotifications(prev => prev.map(notif => ({ ...notif, read: true })));
-  };
-
-  const clearAll = () => {
-    setNotifications([]);
-  };
 
   const unreadCount = notifications.filter(n => !n.read).length;
 
+  const markAsRead = (id) => {
+    setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n));
+  };
+
+  const markAllAsRead = () => {
+    setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+  };
+
+  const deleteNotification = (id) => {
+    setNotifications(prev => prev.filter(n => n.id !== id));
+  };
+
+  const getColorClasses = (color) => {
+    const colors = {
+      amber: { gradient: 'from-amber-500 to-orange-600', bg: 'from-amber-500/10 to-orange-600/10', border: 'border-amber-500/30', text: 'text-amber-400' },
+      emerald: { gradient: 'from-emerald-500 to-teal-600', bg: 'from-emerald-500/10 to-teal-600/10', border: 'border-emerald-500/30', text: 'text-emerald-400' },
+      purple: { gradient: 'from-purple-500 to-pink-600', bg: 'from-purple-500/10 to-pink-600/10', border: 'border-purple-500/30', text: 'text-purple-400' },
+      red: { gradient: 'from-red-500 to-pink-600', bg: 'from-red-500/10 to-pink-600/10', border: 'border-red-500/30', text: 'text-red-400' },
+      blue: { gradient: 'from-blue-500 to-indigo-600', bg: 'from-blue-500/10 to-indigo-600/10', border: 'border-blue-500/30', text: 'text-blue-400' },
+      orange: { gradient: 'from-orange-500 to-red-600', bg: 'from-orange-500/10 to-red-600/10', border: 'border-orange-500/30', text: 'text-orange-400' }
+    };
+    return colors[color] || colors.purple;
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50 dark:from-gray-900 dark:via-gray-800 dark:to-emerald-950">
-      <div className="max-w-4xl mx-auto p-6 space-y-6">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-emerald-600 to-teal-600 rounded-2xl p-8 text-white shadow-xl">
-          <div className="flex items-center justify-between">
+    <div>
+      <TahfizNavBar />
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-violet-950 p-4 md:p-8">
+        <div className="max-w-5xl mx-auto">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-8">
             <div>
               <div className="flex items-center gap-3 mb-2">
-                <div className="relative">
-                  <Bell className="w-10 h-10" />
-                  {unreadCount > 0 && (
-                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-xs font-bold animate-pulse">
-                      {unreadCount}
-                    </div>
-                  )}
-                </div>
-                <h1 className="text-4xl font-bold">Notification Center</h1>
+                <h1 className="text-3xl md:text-4xl font-bold text-white">Notifications</h1>
+                {unreadCount > 0 && (
+                  <span className="px-3 py-1 bg-gradient-to-r from-red-500 to-pink-600 text-white text-sm font-bold rounded-full">
+                    {unreadCount} New
+                  </span>
+                )}
               </div>
-              <p className="text-emerald-100 text-lg">
-                Stay updated with Halaqa activities and student milestones
-              </p>
+              <p className="text-slate-400">Stay updated with your Tahfiz journey</p>
             </div>
-            <div className="flex items-center gap-3">
-              <button
+            {unreadCount > 0 && (
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={markAllAsRead}
-                className="flex items-center gap-2 bg-white bg-opacity-20 backdrop-blur-lg px-6 py-3 rounded-xl font-semibold hover:bg-opacity-30 transition-all"
+                className="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl font-semibold transition-colors flex items-center gap-2"
               >
-                <MailOpen className="w-5 h-5" />
-                Mark All Read
-              </button>
-              <button
-                onClick={clearAll}
-                className="flex items-center gap-2 bg-white bg-opacity-20 backdrop-blur-lg px-6 py-3 rounded-xl font-semibold hover:bg-opacity-30 transition-all"
+                <CheckCircle className="w-4 h-4" />
+                <span className="hidden sm:inline">Mark All as Read</span>
+              </motion.button>
+            )}
+          </div>
+
+          {/* Filters */}
+          <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
+            {filters.map((f) => (
+              <motion.button
+                key={f.id}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setFilter(f.id)}
+                className={`px-4 py-2 rounded-xl font-semibold text-sm transition-all whitespace-nowrap ${
+                  filter === f.id
+                    ? 'bg-gradient-to-r from-purple-500 to-pink-600 text-white'
+                    : 'bg-slate-800/50 text-slate-400 hover:text-white border border-slate-700/50'
+                }`}
               >
-                <Trash2 className="w-5 h-5" />
-                Clear All
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Stats & Filters */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                <span className="text-sm text-gray-600 dark:text-gray-400">
-                  {notifications.filter(n => n.type === 'halaqa-reminder').length} Halaqa Reminders
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                <span className="text-sm text-gray-600 dark:text-gray-400">
-                  {notifications.filter(n => n.type === 'missed-session').length} Missed Sessions
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-amber-500 rounded-full"></div>
-                <span className="text-sm text-gray-600 dark:text-gray-400">
-                  {notifications.filter(n => n.type === 'assessment-due').length} Assessments
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                <span className="text-sm text-gray-600 dark:text-gray-400">
-                  {notifications.filter(n => n.type === 'milestone').length} Milestones
-                </span>
-              </div>
-            </div>
+                {f.label} {f.count > 0 && `(${f.count})`}
+              </motion.button>
+            ))}
           </div>
 
-          <div className="flex items-center gap-3">
-            <Filter className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-            <button
-              onClick={() => setFilter('all')}
-              className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
-                filter === 'all'
-                  ? 'bg-emerald-600 text-white'
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-              }`}
-            >
-              All ({notifications.length})
-            </button>
-            <button
-              onClick={() => setFilter('unread')}
-              className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
-                filter === 'unread'
-                  ? 'bg-emerald-600 text-white'
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-              }`}
-            >
-              Unread ({unreadCount})
-            </button>
-            <button
-              onClick={() => setFilter('today')}
-              className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
-                filter === 'today'
-                  ? 'bg-emerald-600 text-white'
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-              }`}
-            >
-              Today
-            </button>
-            <button
-              onClick={() => setFilter('week')}
-              className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
-                filter === 'week'
-                  ? 'bg-emerald-600 text-white'
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-              }`}
-            >
-              This Week
-            </button>
-          </div>
-        </div>
-
-        {/* Notifications List */}
-        <div className="space-y-3">
-          {filteredNotifications.length === 0 ? (
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-12 text-center">
-              <Bell className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                No notifications
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                You're all caught up! Check back later for updates.
-              </p>
-            </div>
-          ) : (
-            filteredNotifications.map((notif, index) => {
-              const style = getNotificationStyle(notif.type);
-              const Icon = style.icon;
-              
-              return (
-                <div
-                  key={notif.id}
-                  className={`${style.bg} rounded-xl border-l-4 ${style.border} shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden animate-slideInRight`}
-                  style={{ animationDelay: `${index * 0.05}s` }}
+          {/* Notifications List */}
+          <div className="space-y-3">
+            <AnimatePresence mode="popLayout">
+              {filteredNotifications.length === 0 ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  className="text-center py-16"
                 >
-                  <div className="flex items-start gap-4 p-6">
-                    {/* Avatar & Icon */}
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center text-white font-bold text-lg">
-                        {notif.avatar}
+                  <Bell className="w-16 h-16 text-slate-600 mx-auto mb-4" />
+                  <h3 className="text-xl font-bold text-white mb-2">No Notifications</h3>
+                  <p className="text-slate-400">You're all caught up!</p>
+                </motion.div>
+              ) : (
+                filteredNotifications.map((notification, idx) => {
+                  const Icon = notification.icon;
+                  const colors = getColorClasses(notification.color);
+                  return (
+                    <motion.div
+                      key={notification.id}
+                      layout
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 20 }}
+                      transition={{ delay: idx * 0.05 }}
+                      drag="x"
+                      dragConstraints={{ left: -100, right: 0 }}
+                      dragElastic={0.2}
+                      onDragEnd={(e, { offset }) => {
+                        if (offset.x < -80) {
+                          deleteNotification(notification.id);
+                        }
+                      }}
+                      className={`group relative bg-gradient-to-br ${colors.bg} border ${colors.border} rounded-2xl p-5 cursor-pointer transition-all ${
+                        !notification.read ? 'shadow-lg' : 'opacity-75'
+                      } hover:opacity-100 hover:scale-[1.01]`}
+                      onClick={() => !notification.read && markAsRead(notification.id)}
+                    >
+                      {/* Swipe Indicator */}
+                      <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="text-xs text-slate-500">← Swipe to delete</div>
                       </div>
-                      <div className={`p-2 ${style.iconBg} rounded-lg`}>
-                        <Icon className={`w-5 h-5 ${style.iconColor}`} />
-                      </div>
-                    </div>
 
-                    {/* Content */}
-                    <div className="flex-1">
-                      <div className="flex items-start justify-between mb-2">
-                        <div>
-                          <h3 className="font-bold text-gray-900 dark:text-white">
-                            {notif.name}
-                          </h3>
-                          <p className="text-gray-700 dark:text-gray-300 mt-1">
-                            {notif.message}
-                          </p>
+                      <div className="flex items-start gap-4">
+                        {/* Icon */}
+                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${colors.gradient} flex items-center justify-center flex-shrink-0`}>
+                          <Icon className="w-6 h-6 text-white" />
                         </div>
-                        {!notif.read && (
-                          <div className="w-3 h-3 bg-emerald-600 rounded-full animate-pulse"></div>
-                        )}
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                        <Clock className="w-4 h-4" />
-                        {notif.time}
-                      </div>
-                    </div>
 
-                    {/* Actions */}
-                    <div className="flex items-center gap-2">
-                      {!notif.read && (
-                        <button
-                          onClick={() => markAsRead(notif.id)}
-                          className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors"
-                          title="Mark as read"
-                        >
-                          <CheckCircle className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-                        </button>
-                      )}
-                      <button
-                        onClick={() => dismissNotification(notif.id)}
-                        className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors"
-                        title="Dismiss"
-                      >
-                        <X className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              );
-            })
+                        {/* Content */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-start justify-between gap-3 mb-2">
+                            <h3 className="text-white font-bold">{notification.title}</h3>
+                            {!notification.read && (
+                              <span className="w-2 h-2 bg-gradient-to-r from-red-500 to-pink-600 rounded-full flex-shrink-0 mt-1.5" />
+                            )}
+                          </div>
+                          <p className="text-slate-300 text-sm mb-3">{notification.message}</p>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-3 text-sm text-slate-400">
+                              <span className="flex items-center gap-1">
+                                <Clock className="w-3 h-3" />
+                                {notification.time}
+                              </span>
+                              {notification.student && (
+                                <span className="flex items-center gap-1">
+                                  <Users className="w-3 h-3" />
+                                  {notification.student}
+                                </span>
+                              )}
+                            </div>
+                            <div className="flex items-center gap-2">
+                              {!notification.read && (
+                                <motion.button
+                                  whileHover={{ scale: 1.1 }}
+                                  whileTap={{ scale: 0.9 }}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    markAsRead(notification.id);
+                                  }}
+                                  className="p-2 hover:bg-slate-700/50 rounded-lg transition-colors"
+                                  title="Mark as read"
+                                >
+                                  <Eye className={`w-4 h-4 ${colors.text}`} />
+                                </motion.button>
+                              )}
+                              <motion.button
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  deleteNotification(notification.id);
+                                }}
+                                className="p-2 hover:bg-red-500/20 rounded-lg transition-colors"
+                                title="Delete"
+                              >
+                                <Trash2 className="w-4 h-4 text-red-400" />
+                              </motion.button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Load More (if needed) */}
+          {filteredNotifications.length >= 10 && (
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full mt-6 py-3 bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 text-white rounded-xl font-semibold transition-all"
+            >
+              Load More Notifications
+            </motion.button>
           )}
         </div>
-
-        {/* Load More (UI-only) */}
-        {filteredNotifications.length > 0 && (
-          <div className="text-center">
-            <button className="px-8 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-bold hover:from-emerald-700 hover:to-teal-700 transition-all shadow-lg">
-              Load More Notifications
-            </button>
-          </div>
-        )}
       </div>
-
-      <style jsx>{`
-        @keyframes slideInRight {
-          from {
-            transform: translateX(100%);
-            opacity: 0;
-          }
-          to {
-            transform: translateX(0);
-            opacity: 1;
-          }
-        }
-        .animate-slideInRight {
-          animation: slideInRight 0.3s ease-out forwards;
-        }
-      `}</style>
     </div>
   );
 }
