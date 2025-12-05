@@ -18,12 +18,14 @@ const getTimeBasedGreeting = () => {
 // Knowledge base for DRAIS with intelligent responses
 const knowledgeBase = {
   greetings: {
-    keywords: ["hello", "hi", "hey", "howdy", "greetings", "good morning", "good afternoon", "good evening"],
+    keywords: ["hello", "hi", "hey", "howdy", "greetings", "good morning", "good afternoon", "good evening", "wassup", "yo", "sup", "hiya", "aloha"],
     responses: [
       `${getTimeBasedGreeting()}! 👋 I'm your DRAIS AI Assistant. How can I help you today?`,
       "Hello there! 😊 Ready to explore DRAIS? Ask me anything!",
       "Hey! Great to see you! I'm here to answer all your DRAIS questions.",
       `${getTimeBasedGreeting()}! ✨ Welcome to DRAIS. What would you like to know?`,
+      "Yo! What's up? 🎉 Ready to dive into DRAIS? I'm all ears!",
+      "Wassup! 🤙 Let's make school management easy together. What do you need help with?",
     ],
     tone: "cheerful",
   },

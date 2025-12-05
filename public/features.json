@@ -1,16 +1,144 @@
 {
-  "version": "0.0.0018",
+  "version": "0.0.0019",
   "lastUpdated": "2025-12-04",
   "features": [
+    {
+      "id": "bulk-operations",
+      "title": "Bulk Operations Suite",
+      "description": "Import and update hundreds of records at once with Excel templates - students, fees, promotions, and attendance.",
+      "route": "/bulk/students",
+      "tag": "NEW",
+      "category": "Operations",
+      "icon": "Upload",
+      "dateAdded": "2025-12-04",
+      "version_introduced": "0.0.0019",
+      "is_new": true,
+      "highlights": [
+        "Bulk student data import with validation",
+        "Mass fee adjustments across classes",
+        "One-click student promotions",
+        "Attendance import from external systems"
+      ]
+    },
+    {
+      "id": "teacher-portal",
+      "title": "Teacher Portal",
+      "description": "Dedicated dashboard for teachers to manage classes, mark attendance, enter grades, and communicate with students.",
+      "route": "/teacher/dashboard",
+      "tag": "NEW",
+      "category": "Portals",
+      "icon": "GraduationCap",
+      "dateAdded": "2025-12-04",
+      "version_introduced": "0.0.0019",
+      "is_new": true,
+      "highlights": [
+        "Personalized teacher dashboard",
+        "Quick attendance marking",
+        "Marks entry with validation",
+        "Class performance analytics"
+      ]
+    },
+    {
+      "id": "parent-portal",
+      "title": "Parent Portal",
+      "description": "Parents can view children's performance, fees, attendance, and communicate with school staff.",
+      "route": "/parent/dashboard",
+      "tag": "NEW",
+      "category": "Portals",
+      "icon": "Users",
+      "dateAdded": "2025-12-04",
+      "version_introduced": "0.0.0019",
+      "is_new": true,
+      "highlights": [
+        "Multi-child management",
+        "Real-time fee status",
+        "Exam results viewing",
+        "Attendance tracking"
+      ]
+    },
+    {
+      "id": "multi-school-admin",
+      "title": "Multi-School Administration",
+      "description": "Manage multiple schools from a single interface with consolidated reporting and analytics.",
+      "route": "/multi-school/overview",
+      "tag": "NEW",
+      "category": "Administration",
+      "icon": "Grid3x3",
+      "dateAdded": "2025-12-04",
+      "version_introduced": "0.0.0019",
+      "is_new": true,
+      "highlights": [
+        "Cross-school analytics dashboard",
+        "Centralized student/staff management",
+        "Consolidated financial reports",
+        "School-specific branding"
+      ]
+    },
+    {
+      "id": "notifications-center",
+      "title": "Notifications Center",
+      "description": "Unified notifications hub with smart categorization and real-time updates across all modules.",
+      "route": "/notifications",
+      "tag": "NEW",
+      "category": "Communication",
+      "icon": "Bell",
+      "dateAdded": "2025-12-04",
+      "version_introduced": "0.0.0019",
+      "is_new": true,
+      "highlights": [
+        "System, fees, attendance alerts",
+        "Priority-based sorting",
+        "Mark as read functionality",
+        "Mobile slide-up panel"
+      ]
+    },
+    {
+      "id": "branding-center",
+      "title": "Advanced Branding Center",
+      "description": "Customize your school's look with logo uploads, color palettes, and font selection with live preview.",
+      "route": "/settings/branding",
+      "tag": "NEW",
+      "category": "Customization",
+      "icon": "Sparkles",
+      "dateAdded": "2025-12-04",
+      "version_introduced": "0.0.0019",
+      "is_new": true,
+      "highlights": [
+        "Upload school logo and stamp",
+        "8+ color palette options",
+        "10+ modern fonts",
+        "Live UI theme preview"
+      ]
+    },
+    {
+      "id": "biometric-simulation",
+      "title": "Biometric Simulation",
+      "description": "Interactive Face ID and Fingerprint scanning simulation with realistic animations and feedback.",
+      "route": "/biometrics/face-id",
+      "tag": "NEW",
+      "category": "Attendance",
+      "icon": "Fingerprint",
+      "dateAdded": "2025-12-04",
+      "version_introduced": "0.0.0019",
+      "is_new": true,
+      "highlights": [
+        "Live webcam face detection UI",
+        "Fingerprint scanning animation",
+        "Success/failure visual feedback",
+        "Dark mode neon effects"
+      ]
+    },
     {
       "id": "ai-copilot",
       "title": "AI Copilot Dashboard",
       "description": "Predictive analytics with 94% accuracy for student performance, attendance risks, and financial forecasting.",
       "route": "/ai-copilot",
-      "tag": "NEW",
+      "tag": "Core",
       "category": "AI Features",
       "icon": "Brain",
-      "dateAdded": "2025-12-04",
+      "dateAdded": "2025-12-03",
+      "version_introduced": "0.0.0015",
+      "is_new": false,
       "highlights": [
         "Student risk analysis with confidence scores",
         "Automated fee collection predictions",

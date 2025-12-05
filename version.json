@@ -1,9 +1,25 @@
 {
-  "version": "0.0.0010",
+  "version": "0.0.0030",
   "name": "DRAIS",
   "description": "School Management System by Xhenvolt",
-  "lastUpdated": "2025-12-02",
+  "lastUpdated": "2025-01-22",
   "changelog": [
+    {
+      "version": "0.0.0030",
+      "date": "2025-01-22",
+      "changes": [
+        "Added Tahfiz Module Phase 2 - Advanced Features",
+        "Created Daily Halaqa Sessions UI with tutor management",
+        "Built Automated Mistake Tracking with live waveform visualization",
+        "Implemented Mushaf Page Tracker with 604-page grid system",
+        "Added comprehensive Tahfiz Assessment UI (Weekly/Monthly/Summary)",
+        "Extended Student Profile with Tahfiz-specific data and visualizations",
+        "Created Tahfiz Tutor Dashboard with performance insights",
+        "Added memorization timeline, revision schedule, and achievement badges",
+        "Implemented mastery heatmap for 114 Surahs",
+        "Enhanced tutor supervision tools with student performance tracking"
+      ]
+    },
     {
       "version": "0.0.0010",
       "date": "2025-12-02",

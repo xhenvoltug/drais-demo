@@ -27,6 +27,10 @@ import {
   Sparkles,
   ArrowRight,
   CheckCircle,
+  Upload,
+  Users,
+  Grid3x3,
+  Bell,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -41,6 +45,11 @@ const iconMap = {
   GraduationCap,
   CreditCard,
   Bot,
+  Upload,
+  Users,
+  Grid3x3,
+  Bell,
+  Sparkles,
 };
 
 export default function WhatsNewModal() {
@@ -51,13 +60,13 @@ export default function WhatsNewModal() {
   useEffect(() => {
     // Check if user has seen this version
     const lastSeenVersion = localStorage.getItem("drais_last_seen_version");
-    const currentVersion = "0.0.0018"; // Should match DRAIS_VERSION
+    const currentVersion = "0.0.0019"; // Should match DRAIS_VERSION
 
     // Fetch features
     fetch("/features.json")
       .then((res) => res.json())
       .then((data) => {
-        setFeatures(data.features.filter((f) => f.tag === "NEW"));
+        setFeatures(data.features.filter((f) => f.is_new === true));
         setLoading(false);
 
         // Show modal only if user hasn't seen this version
@@ -73,7 +82,7 @@ export default function WhatsNewModal() {
 
   const handleClose = () => {
     // Save version to localStorage
-    localStorage.setItem("drais_last_seen_version", "0.0.0018");
+    localStorage.setItem("drais_last_seen_version", "0.0.0019");
     setIsOpen(false);
   };
 
@@ -88,7 +97,7 @@ export default function WhatsNewModal() {
               <Sparkles className="w-6 h-6 text-white" />
             </div>
             <div>
-              <DialogTitle className="text-2xl">What's New in DRAIS v0.0.0018</DialogTitle>
+              <DialogTitle className="text-2xl">What's New in DRAIS v0.0.0019</DialogTitle>
               <DialogDescription className="text-base">
                 Exciting new features and improvements!
               </DialogDescription>

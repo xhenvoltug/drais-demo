@@ -169,7 +169,7 @@ export default function DocsPage() {
                 placeholder="Search documentation... (e.g., attendance, payments, AI)"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 pr-4 py-6 text-lg bg-white dark:bg-gray-800 border-none shadow-2xl"
+                className="pl-12 pr-4 py-6 text-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 border-none shadow-2xl"
               />
             </div>
 

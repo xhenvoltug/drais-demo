@@ -65,6 +65,8 @@ import {
   Lightbulb,
   Brain,
   Activity,
+  FileEdit,
+  Fingerprint,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -203,6 +205,69 @@ const navigationGroups = [
     ],
   },
   {
+    name: "DRAIS Kitchen",
+    icon: Sparkles,
+    items: [
+      { name: "Kitchen Home", href: "/kitchen", icon: Sparkles },
+      { name: "Theme Builder", href: "/kitchen/themes", icon: Settings },
+      { name: "Color Palettes", href: "/kitchen/palettes", icon: Lightbulb },
+      { name: "Font Manager", href: "/kitchen/fonts", icon: FileText },
+      { name: "Component Styler", href: "/kitchen/components", icon: Grid3x3 },
+      { name: "Report Designer", href: "/kitchen/reports-designer", icon: FileText },
+      { name: "Email Templates", href: "/kitchen/email-templates", icon: Mail },
+      { name: "SMS Templates", href: "/kitchen/sms-templates", icon: MessageSquare },
+      { name: "Export & Presets", href: "/kitchen/export", icon: Upload },
+      { name: "History & Audit", href: "/kitchen/history", icon: Clock },
+      { name: "Permissions", href: "/kitchen/permissions", icon: Shield },
+      { name: "Tahfiz Styling", href: "/kitchen/tahfiz", icon: BookOpen },
+      { name: "Live Preview", href: "/kitchen/live-preview", icon: Activity },
+      { name: "Getting Started", href: "/kitchen/getting-started", icon: Brain },
+    ],
+  },
+  {
+    name: "Bulk Operations",
+    icon: Upload,
+    items: [
+      { name: "Bulk Student Update", href: "/bulk/students", icon: Users },
+      { name: "Bulk Fee Adjustments", href: "/bulk/fees", icon: DollarSign },
+      { name: "Bulk Promotions", href: "/bulk/promotions", icon: ArrowUpCircle },
+      { name: "Bulk Attendance Import", href: "/bulk/attendance", icon: UserCheck },
+    ],
+  },
+  {
+    name: "Teacher Portal",
+    icon: GraduationCap,
+    items: [
+      { name: "Teacher Dashboard", href: "/teacher/dashboard", icon: LayoutDashboard },
+      { name: "My Classes", href: "/teacher/classes", icon: Users },
+      { name: "Take Attendance", href: "/teacher/attendance", icon: UserCheck },
+      { name: "Enter Marks", href: "/teacher/marks-entry", icon: FileEdit },
+      { name: "Messages", href: "/teacher/messages", icon: MessageSquare },
+      { name: "My Profile", href: "/teacher/profile", icon: User },
+    ],
+  },
+  {
+    name: "Parent Portal",
+    icon: Users,
+    items: [
+      { name: "Parent Dashboard", href: "/parent/dashboard", icon: LayoutDashboard },
+      { name: "My Children", href: "/parent/children", icon: Users },
+      { name: "Fees & Payments", href: "/parent/fees", icon: DollarSign },
+      { name: "Exam Results", href: "/parent/results", icon: Award },
+      { name: "Attendance", href: "/parent/attendance", icon: Calendar },
+      { name: "Messages", href: "/parent/messages", icon: MessageSquare },
+    ],
+  },
+  {
+    name: "Multi-School Admin",
+    icon: Grid3x3,
+    items: [
+      { name: "Overview", href: "/multi-school/overview", icon: LayoutDashboard },
+      { name: "Manage Schools", href: "/multi-school/schools", icon: GraduationCap },
+      { name: "Consolidated Reports", href: "/multi-school/reports", icon: FileText },
+    ],
+  },
+  {
     name: "Administration",
     icon: Settings,
     items: [
@@ -211,7 +276,16 @@ const navigationGroups = [
       { name: "Discipline", href: "/discipline", icon: AlertTriangle },
       { name: "Onboarding", href: "/onboarding", icon: Briefcase },
       { name: "Audit Logs", href: "/audit-logs", icon: Shield },
+      { name: "Branding Center", href: "/settings/branding", icon: Sparkles },
       { name: "Settings", href: "/settings", icon: Cog },
+    ],
+  },
+  {
+    name: "Biometrics",
+    icon: Fingerprint,
+    items: [
+      { name: "Face ID Setup", href: "/biometrics/face-id", icon: UserCheck },
+      { name: "Fingerprint Setup", href: "/biometrics/fingerprint", icon: Fingerprint },
     ],
   },
   {
@@ -219,6 +293,7 @@ const navigationGroups = [
     icon: BookOpen,
     items: [
       { name: "Documentation", href: "/docs", icon: BookOpen },
+      { name: "Notifications", href: "/notifications", icon: Bell },
     ],
   },
 ];
